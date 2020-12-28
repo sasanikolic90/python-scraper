@@ -25,7 +25,7 @@ for bike in bikes:
     # You can use the same methods on it as you did before.
     title_elem = bike.find('div', class_='productTile__productName')
     price_elem = bike.find('div', class_='productTile__priceSale')
-    message += title_elem.text.strip() + ':' + price_elem.text.strip() + '\n'
+    message += title_elem.text.strip() + ': ' + price_elem.text.strip() + '\n'
 
 # Send email here
 password = input("Type your password and press enter: ")
@@ -34,4 +34,6 @@ password = input("Type your password and press enter: ")
 context = ssl.create_default_context()
 with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
     server.login(sender_email, password)
-    server.sendmail(sender_email, receiver_email, message.encode('utf-8'))
+    server.sendmail(sender_email, receiver_email, message.encode())
+
+print('Email was sent to ' + receiver_email)
