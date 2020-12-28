@@ -5,12 +5,12 @@ from email.message import EmailMessage
 
  # Port for SSL.
 port = 465 
-smtp_server = "smtp.gmail.com"
+smtp_server = 'smtp.gmail.com'
 # Construct email.
 email = EmailMessage()
 email['Subject'] = 'Canyon bikes'
-email['From'] = "6rodney6@gmail.com"
-email['To'] = "6rodney6@gmail.com"
+email['From'] = '6rodney6@gmail.com'
+email['To'] = '6rodney6@gmail.com'
 
 URL = 'https://www.canyon.com/en-si/outlet/road-bikes/?cgid=outlet-road&prefn1=pc_familie&prefn2=pc_rahmengroesse&prefv1=Ultimate&prefv2=XL'
 page = requests.get(URL)
@@ -26,12 +26,13 @@ for bike in bikes:
     # Each bike is a new BeautifulSoup object.
     title_elem = bike.find('div', class_='productTile__productName')
     price_elem = bike.find('div', class_='productTile__priceSale')
-    msg += title_elem.text.strip() + ': <strong>' + price_elem.text.strip() + '</strong><br>'
+    link_elem = bike.find('a', class_='productTile__link')
+    msg += '<a href="' + link_elem['href'] + '">' + title_elem.text.strip() + '</a>: <strong>' + price_elem.text.strip() + '</strong><br>'
 
 email.set_content('The bikes available are ' + str(count) + ':<br> ' + msg, subtype='html')
 
 # Let the user enter the email password.
-password = input("Type your password and press enter: ")
+password = input('Type your password and press enter: ')
 
 # Create a secure SSL context and send the email.
 context = ssl.create_default_context()
