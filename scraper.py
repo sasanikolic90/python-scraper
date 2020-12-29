@@ -12,14 +12,14 @@ email['Subject'] = 'Canyon bikes'
 email['From'] = '6rodney6@gmail.com'
 email['To'] = '6rodney6@gmail.com'
 
-URL = 'https://www.canyon.com/en-si/outlet/road-bikes/?cgid=outlet-road&prefn1=pc_familie&prefn2=pc_rahmengroesse&prefv1=Ultimate&prefv2=XL'
+URL = 'https://www.canyon.com/en-si/outlet/road-bikes/?cgid=outlet-road&prefn1=pc_familie&prefn2=pc_rahmengroesse&prefv1=Ultimate&prefv2=L'
 page = requests.get(URL)
 soup = BeautifulSoup(page.content, 'html.parser')
 
 # Find the bikes.
 bikes = soup.find_all('li', class_='productGrid__listItem')
 
-count=0
+count = 0
 msg = ''
 for bike in bikes:
     count += 1
